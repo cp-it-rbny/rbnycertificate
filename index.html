@@ -109,11 +109,29 @@
             the fourth and fifth arguments are null, 
             and the sixth argument says that the text should be centered */
 
-            // Save the PDF
-            doc.save('Certificate.pdf');
-            // doc.output('dataurlnewwindow', 'certificate.pdf');
+            // Generate the PDF as a Blob
+            var blob = doc.output('blob');
 
-            //alert(text);
+            // Create a Blob URL
+            var url = URL.createObjectURL(blob);
+
+            // Create a link element
+            var link = document.createElement('a');
+
+            // Set the href of the link to the Blob URL
+            link.href = url;
+
+            // Set the download attribute of the link to specify the file name
+            link.download = 'Certificate.pdf';
+
+            // Append the link to the body
+            document.body.appendChild(link);
+
+            // Simulate a click on the link
+            link.click();
+
+            // Remove the link from the body
+            document.body.removeChild(link);
         }
     </script>
 </body>
