@@ -13,29 +13,10 @@
             height: 100vh;
             margin: 0;
             background: rgb(255, 255, 255);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#858585", GradientType=1);
             font-family: Arial, sans-serif;
-
-        }
-
-        h1 {
-            color: #333;
-            text-transform: uppercase;
-            width: 500px;
-            text-align: center;
-        }
-
-        #myText {
-            width: 300px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
-            text-align: center;
         }
 
         #myButton {
-            margin-top: 20px;
             padding: 10px 20px;
             background-color: rgb(218, 26, 50);
             color: white;
@@ -43,46 +24,102 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            display: block;
+            margin: 20px auto 0;
+            width: 200px;
+            height: 40px;
+            border-radius: 25px;
+            border: none;
+            color: #eee;
+            font-weight: 700;
+            box-shadow: 1px 4px 10px 1px #aaa;
         }
 
         #myButton:hover {
             background-color: rgb(220, 48, 68);
+            box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
         }
-        label{
+
+        label {
             padding: 10px;
             border: none;
             text-align: center;
+            font-family: Arial, sans-serif;
         }
-        
+
+        #feedback-form {
+            width: 280px;
+            margin: 0 auto;
+            background-color: #fcfcfc;
+            padding: 20px 50px 40px;
+            box-shadow: 1px 4px 10px 1px #aaa;
+            font-family: sans-serif;
+        }
+
+        #feedback-form * {
+            box-sizing: border-box;
+        }
+
+        #feedback-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        #feedback-form input {
+            margin-bottom: 15px;
+        }
+
+        #feedback-form input[type=text] {
+            display: block;
+            height: 32px;
+            padding: 6px 16px;
+            width: 100%;
+            border: none;
+            background-color: #f3f3f3;
+        }
+
+        #feedback-form label {
+            color: #777;
+            font-size: 0.8em;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Complete the form below to receive your First Game certificate.</h1>
-    <input type="text" id="myText" placeholder="enter your name here">
+    <div id="feedback-form">
+        <h2 class="header">First Time Match Attendee</h2>
+        <div>
+            <form style="text-align: center;">
+                
+                <input type="text" id="myText" name="name" placeholder="Name"></input>
+                <input type="text" id="myEmail" name="email" placeholder="Email"></input>
 
-    <label for="eventDate">Match Date:</label>
-    <select name="eventDate" id="eventDate" placeholder="Match Date">
-        <option value="Saturday, April 13">April 27, 2024</option>
-        <option value="Saturday, April 27">April 27, 2024</option>
-        <option value="Saturday, May 11">May 11, 2024</option>
-        <option value="Wednesday, May 29">May 29, 2024</option>
-        <option value="Saturday, June 1st">June 1, 2024</option>
-        <option value="Saturday, June 15">June 15, 2024</option>
-        <option value="Saturday, June 22">June 22, 2024</option>
-        <option value="Saturday, June 29">June 29, 2024</option>
-        <option value="Wednesday, July 17">July 17, 2024</option>
-        <option value="Saturday, July 20">July 20, 2024</option>
-        <option value="Saturday, August 31">August 31, 2024</option>
-        <option value="Saturday, September 7">September 7, 2024</option>
-        <option value="Saturday, September 21">September 21, 2024</option>
-        <option value="Saturday, September 28">September 28, 2024</option>
-        <option value="Saturday, October 19">October 19, 2024</option>
-    </select>
-    <button id="myButton">Download Certificate</button>
+                <label for="eventDate" style="text-align: center;margin: 20px auto;"> Select Match Date:</label>
+                <select name="eventDate" id="eventDate" placeholder="Match Date" style="margin-top: 10px;">
+                    <option value="Saturday, April 13">April 13, 2024</option>
+                    <option value="Saturday, April 27">April 27, 2024</option>
+                    <option value="Saturday, May 11">May 11, 2024</option>
+                    <option value="Wednesday, May 29">May 29, 2024</option>
+                    <option value="Saturday, June 1st">June 1, 2024</option>
+                    <option value="Saturday, June 15">June 15, 2024</option>
+                    <option value="Saturday, June 22">June 22, 2024</option>
+                    <option value="Saturday, June 29">June 29, 2024</option>
+                    <option value="Wednesday, July 17">July 17, 2024</option>
+                    <option value="Saturday, July 20">July 20, 2024</option>
+                    <option value="Saturday, August 31">August 31, 2024</option>
+                    <option value="Saturday, September 7">September 7, 2024</option>
+                    <option value="Saturday, September 21">September 21, 2024</option>
+                    <option value="Saturday, September 28">September 28, 2024</option>
+                    <option value="Saturday, October 19">October 19, 2024</option>
+                </select>
+                <button id="myButton" type="submit">Download Certificate</button>
+            </form>
+        </div>
+    </div>
 
     <script>
-        document.getElementById('myButton').onclick = function () {
+
+        document.getElementById('myButton').addEventListener('click', async _ => {
             var text = document.getElementById('myText').value;
             var date = document.getElementById('eventDate').value;
 
@@ -91,7 +128,7 @@
             var doc = new jsPDF("landscape", "in", [11, 8.5]);
 
             doc.addImage("https://cp-it-rbny.github.io/signature/Certificate_background.png", 'PNG', 0, 0, 11, 8.5);
-            
+
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(40);
             doc.setTextColor(255, 255, 255);
@@ -101,12 +138,6 @@
             doc.setFontSize(27);
             doc.setTextColor(255, 255, 255);
             doc.text("on " + date, (doc.internal.pageSize.width / 2), 7.2, null, null, 'center');
-            /* This tells the PDF to add text to the page. 
-            The first argument is the text to add (in this case a JavaScript variable), 
-            the second is the x-coordinate (in this case we’re using a function to find a middle point for the document),
-            the third is the y-coordinate (in millimeters), 
-            the fourth and fifth arguments are null, 
-            and the sixth argument says that the text should be centered */
 
             // Generate the PDF as a Blob
             var blob = doc.output('blob');
@@ -114,26 +145,11 @@
             // Create a Blob URL
             var url = URL.createObjectURL(blob);
 
-            //Open in a new tab
-            window.open(url);
-            // Create a link element
-            //var link = document.createElement('a');
+            window.open(url);  // will open a new tab
 
-            // Set the href of the link to the Blob URL
-           // link.href = url;
+        });
 
-            // Set the download attribute of the link to specify the file name
-           // link.download = 'Certificate.pdf';
 
-            // Append the link to the body
-           // document.body.appendChild(link);
-
-            // Simulate a click on the link
-           // link.click();
-
-            // Remove the link from the body
-           // document.body.removeChild(link);
-        }
     </script>
 </body>
 
