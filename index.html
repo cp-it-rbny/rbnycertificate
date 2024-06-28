@@ -37,7 +37,7 @@
         #myButton {
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #007BFF;
+            background-color: rgb(218, 26, 50);
             color: white;
             border: none;
             border-radius: 5px;
@@ -46,7 +46,7 @@
         }
 
         #myButton:hover {
-            background-color: #0056b3;
+            background-color: rgb(220, 48, 68);
         }
         label{
             padding: 10px;
@@ -90,7 +90,6 @@
 
             var doc = new jsPDF("landscape", "in", [11, 8.5]);
 
-            doc.text("Certificate", 10, 10);
             doc.addImage("https://cp-it-rbny.github.io/signature/Certificate_background.png", 'PNG', 0, 0, 11, 8.5);
             
             doc.setFont('helvetica', 'bold');
@@ -115,23 +114,25 @@
             // Create a Blob URL
             var url = URL.createObjectURL(blob);
 
+            //Open in a new tab
+            window.open(url);
             // Create a link element
-            var link = document.createElement('a');
+            //var link = document.createElement('a');
 
             // Set the href of the link to the Blob URL
-            link.href = url;
+           // link.href = url;
 
             // Set the download attribute of the link to specify the file name
-            link.download = 'Certificate.pdf';
+           // link.download = 'Certificate.pdf';
 
             // Append the link to the body
-            document.body.appendChild(link);
+           // document.body.appendChild(link);
 
             // Simulate a click on the link
-            link.click();
+           // link.click();
 
             // Remove the link from the body
-            document.body.removeChild(link);
+           // document.body.removeChild(link);
         }
     </script>
 </body>
